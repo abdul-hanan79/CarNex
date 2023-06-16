@@ -1,28 +1,24 @@
 /* eslint-disable prettier/prettier */
-import { View, Text, Pressable } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { useState } from 'react'
 import MainButton from '../components/Button/MainButton';
-import { Input } from '@rneui/themed';
-// import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './Screens.styles';
+import { Input } from '@rneui/themed';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import { colors } from '../colors';
-import useLogin from '../customHooks/useLogin';
 
-const LoginScreen = ({ navigation }) => {
-    const { isError, goToSignup, handleScreenPress, goToHomeScreen, userName, setUserName, password, setPassword } = useLogin();
 
+const SignupScreen = () => {
     return (
         <View style={[styles.container, { backgroundColor: 'white' }]}>
             {/* <TextInput
-        style={styles.inputBox}
-        value={email}
-        onChangeText={onChangeEmail}
-        placeholder={'email'}
-        keyboardType={'email-address'}
-      /> */}
+    style={styles.inputBox}
+    value={email}
+    onChangeText={onChangeEmail}
+    placeholder={'email'}
+    keyboardType={'email-address'}
+  /> */}
             <Text style={[styles.title, { color: colors.text }]}>Login</Text>
             <TouchableWithoutFeedback onPress={handleScreenPress}>
                 <KeyboardAvoidingView style={styles.inputContainer} behavior="padding" >
@@ -55,13 +51,13 @@ const LoginScreen = ({ navigation }) => {
                 </KeyboardAvoidingView>
             </TouchableWithoutFeedback>
             {/* <Input placeholder="Password" secureTextEntry={true} /> */}
-            <MainButton title="Login " onPress={goToHomeScreen} />
+            <MainButton title="Login " />
             <View style={styles.credentialLinks}>
-                <Pressable onPress={goToSignup}>
+                <Pressable >
                     <Text> Forogt Password?</Text>
                 </Pressable>
 
-                <Pressable onPress={() => goToSignup(navigation)}>
+                <Pressable onPress>
                     <Text>Register</Text>
                 </Pressable>
 
@@ -73,4 +69,5 @@ const LoginScreen = ({ navigation }) => {
     )
 }
 
-export default LoginScreen
+export default SignupScreen;
+

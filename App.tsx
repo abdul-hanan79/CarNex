@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import WelcomeScreen from './src/screens/WelcomeScreen';
 import 'react-native-gesture-handler';
 import LoginScreen from './src/screens/LoginScreen';
+import StackNavigator from './src/navigation/StackNavigator';
 const theme = createTheme({
   lightColors: {
     ...Platform.select({
@@ -18,11 +19,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer>
-        {/* This button's color will now be the default iOS / Android blue. */}
-        {/* <Button title="My Button" /> */}
-        {/* <Text>Find and rental car in easy steps</Text> */}
-        {/* <WelcomeScreen/> */}
-        <LoginScreen />
+        <StackNavigator />
       </NavigationContainer>
     </ThemeProvider>
   );
