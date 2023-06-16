@@ -6,6 +6,7 @@ import WelcomeScreen from './src/screens/WelcomeScreen';
 import 'react-native-gesture-handler';
 import LoginScreen from './src/screens/LoginScreen';
 import StackNavigator from './src/navigation/StackNavigator';
+import SignupScreen from './src/screens/SignupScreen';
 const theme = createTheme({
   lightColors: {
     ...Platform.select({
@@ -19,7 +20,8 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer>
-        <StackNavigator />
+        {/* <StackNavigator /> */}
+        <SignupScreen />
       </NavigationContainer>
     </ThemeProvider>
   );

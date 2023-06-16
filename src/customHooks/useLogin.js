@@ -18,7 +18,7 @@ const useLogin = () => {
     };
 
     const handleScreenPress = () => {
-        console.warn("this is running")
+        // console.warn("this is running")
         Keyboard.dismiss();
     };
     return {

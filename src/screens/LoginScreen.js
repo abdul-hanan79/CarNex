@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { View, Text, Pressable } from 'react-native';
 import React from 'react';
-import { useState } from 'react'
+// import { useState } from 'react'
 import MainButton from '../components/Button/MainButton';
 import { Input } from '@rneui/themed';
 // import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
@@ -12,7 +12,7 @@ import { colors } from '../colors';
 import useLogin from '../customHooks/useLogin';
 
 const LoginScreen = ({ navigation }) => {
-    const { isError, goToSignup, handleScreenPress, goToHomeScreen, userName, setUserName, password, setPassword } = useLogin();
+    const { isError, goToSignup, goToHomeScreen, handleScreenPress,userName, setUserName, password, setPassword } = useLogin();
 
     return (
         <View style={[styles.container, { backgroundColor: 'white' }]}>
