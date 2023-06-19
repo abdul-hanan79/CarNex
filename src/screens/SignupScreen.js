@@ -12,7 +12,7 @@ import useLogin from '../customHooks/useLogin';
 // import PhoneInput from 'react-native-phone-input';
 
 const SignupScreen = () => {
-    const { email, setEmail, fullName, setFullName, dob, setDob, phoneNumber, setPhoneNumber, isError, setIsError, handlePhoneNumberChange } = useSignup();
+    const { email, setEmail, fullName, setFullName, dob, setDob, phoneNumber, setPhoneNumber, isError, setIsError, handlePhoneNumberChange, goToLogin, password, setPassword, goToVerification } = useSignup();
     const { handleScreenPress } = useLogin();
     return (
         <View style={[styles.container, { backgroundColor: 'white' }]}>
@@ -64,6 +64,19 @@ const SignupScreen = () => {
                         style={{ width: '100%' }}
                         editable={false} // Disable direct text input
                     />
+                    <Input
+                        value={password}
+                        onChangeText={setPassword}
+                        leftIcon={
+                            <Icon name="lock" size={30} color="black" />
+                        }
+                        placeholder="Date of Birth"
+                        errorStyle={{ color: 'red' }}
+                        errorMessage={isError ? 'ENTER A VALID ERROR HERE' : null}
+                        style={{ width: '100%' }}
+                        editable={false} // Di
+
+                    />
                     {/* <PhoneInput
                         ref={(ref) => {
                             this.phone = ref;
@@ -75,15 +88,12 @@ const SignupScreen = () => {
                 </KeyboardAvoidingView>
             </TouchableWithoutFeedback>
             {/* <Input placeholder="Password" secureTextEntry={true} /> */}
-            <MainButton title="Login " />
+            <MainButton title="Signup " onPress={goToVerification} />
             <View style={styles.credentialLinks}>
-                <Pressable >
-                    <Text> Forogt Password?</Text>
+                <Pressable onPress={goToLogin} >
+                    <Text > Registered Already? <Text style={{ textDecorationLine: 'underline' }}>Login</Text></Text>
                 </Pressable>
 
-                <Pressable onPress>
-                    <Text>Register</Text>
-                </Pressable>
 
 
             </View>

@@ -7,9 +7,16 @@ const useSignup = () => {
     const [dob, setDob] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [isError, setIsError] = useState(false);
+    const [password, setPassword] = useState('')
     const handlePhoneNumberChange = (number) => {
         setPhoneNumber(number);
     };
+    const goToLogin = () => {
+        console.warn('go to login page');
+    }
+    const goToVerification = () => {
+        console.warn('go to verfication page');
+    }
     return {
         email,
         setEmail,
@@ -21,7 +28,11 @@ const useSignup = () => {
         setPhoneNumber,
         isError,
         setIsError,
-    }
-}
+        password,
+        setPassword,
+        goToLogin,
+        goToVerification,
+    };
+};
 
 export default useSignup;
