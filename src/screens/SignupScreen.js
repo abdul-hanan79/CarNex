@@ -9,10 +9,15 @@ import { KeyboardAvoidingView, TouchableWithoutFeedback, Pressable } from 'react
 import { colors } from '../colors';
 import useSignup from '../customHooks/useSignup';
 import useLogin from '../customHooks/useLogin';
+import InputFieldShadow from '../components/InputFieldShadow/InputFieldShadow';
 // import PhoneInput from 'react-native-phone-input';
 
 const SignupScreen = () => {
-    const { email, setEmail, fullName, setFullName, dob, setDob, phoneNumber, setPhoneNumber, isError, setIsError, handlePhoneNumberChange, goToLogin, password, setPassword, goToVerification } = useSignup();
+    const { email, setEmail, fullName, setFullName, CNIC,
+        setCNIC, phoneNumber, confirmPassword,
+        setConfirmPassword, setPhoneNumber, showPassword,
+        showConfirmPassword, isError, setIsError, showPasswordHandler,
+        showConfirmPasswordHandler, handlePhoneNumberChange, clearInputFieldHandler, goToLogin, password, setPassword, goToVerification } = useSignup();
     const { handleScreenPress } = useLogin();
     return (
         <View style={[styles.container, { backgroundColor: 'white' }]}>
@@ -26,57 +31,84 @@ const SignupScreen = () => {
             <Text style={[styles.title, { color: colors.text }]}>Sign Up</Text>
 
             <TouchableWithoutFeedback onPress={handleScreenPress}>
-                <KeyboardAvoidingView style={styles.inputContainer} behavior="padding" >
-                    <Input
+                <KeyboardAvoidingView style={[styles.inputContainer, { gap: 20, justifyContent: 'center', alignItems: 'center' }]} behavior="padding" >
+                    <InputFieldShadow input={<Input
                         value={fullName}
                         onChangeText={setFullName}
                         leftIcon={
                             <Icon name="user" size={30} color="black" />
 
                         }
+                        rightIcon={<Icon name="close" size={20} onPress={() => clearInputFieldHandler(setFullName)} />}
+
                         placeholder="Full Name"
                         errorStyle={{ color: 'red' }}
                         errorMessage={isError ? 'ENTER A VALID ERROR HERE' : null}
                         style={{ width: '100%' }}
-                    />
-                    <Input
+                    />} />
+                    <InputFieldShadow input={<Input
                         value={email}
                         onChangeText={setEmail}
                         leftIcon={
                             <Icon name="envelope" size={30} color="black" />
 
                         }
+
+                        // inputStyle={{ borderBottomWidth: 1,borderBottomColor:'red' }}
+                        rightIcon={<Icon name="close" size={20} onPress={() => clearInputFieldHandler(setEmail)} />}
                         placeholder="Email"
                         errorStyle={{ color: 'red' }}
                         errorMessage={isError ? 'ENTER A VALID ERROR HERE' : null}
                         style={{ width: '100%' }}
-                    />
-                    <Input
-                        value={dob}
-                        onChangeText={setDob}
+                    />} />
+                    <InputFieldShadow input={<Input
+                        value={CNIC}
+                        onChangeText={setCNIC}
                         leftIcon={
-                            <Icon name="calendar" size={30} color="black" />
+                            <Icon name="id-card-o" size={30} color="black" />
 
                         }
-                        placeholder="Date of Birth"
+                        rightIcon={<Icon name="close" size={20} onPress={() => clearInputFieldHandler(setCNIC)} />}
+
+                        placeholder="CNIC"
                         errorStyle={{ color: 'red' }}
                         errorMessage={isError ? 'ENTER A VALID ERROR HERE' : null}
                         style={{ width: '100%' }}
-                        editable={false} // Disable direct text input
-                    />
-                    <Input
+                    // editable={false} // Disable direct text input
+                    />} />
+                    <InputFieldShadow input={<Input
                         value={password}
                         onChangeText={setPassword}
                         leftIcon={
                             <Icon name="lock" size={30} color="black" />
                         }
-                        placeholder="Date of Birth"
+                        rightIcon={<Icon name={showPassword ? "eye" : "eye-slash"} size={20} onPress={showPasswordHandler} />}
+                        placeholder="Password"
                         errorStyle={{ color: 'red' }}
                         errorMessage={isError ? 'ENTER A VALID ERROR HERE' : null}
                         style={{ width: '100%' }}
-                        editable={false} // Di
+                        // editable={false} 
+                        secureTextEntry={showPassword ? false : true}
 
-                    />
+                    />} />
+                    <InputFieldShadow input={<Input
+                        value={confirmPassword}
+                        onChangeText={setConfirmPassword}
+                        leftIcon={
+                            <Icon name="lock" size={30} color="black" />
+                        }
+                        rightIcon={<Icon name={showConfirmPassword ? 'eye' : 'eye-slash'} size={20} onPress={showConfirmPasswordHandler} />}
+
+
+                        placeholder="Confirm Password"
+                        errorStyle={{ color: 'red' }}
+                        errorMessage={isError ? 'ENTER A VALID ERROR HERE' : null}
+                        style={{ width: '100%' }}
+                        // editable={false} // Di
+                        secureTextEntry={showConfirmPassword ? false : true}
+
+                    />} />
+
                     {/* <PhoneInput
                         ref={(ref) => {
                             this.phone = ref;
@@ -99,7 +131,7 @@ const SignupScreen = () => {
             </View>
             {/* <FontAwesomeIcon name="rowing" size={30} color="blue" /> */}
 
-        </View>
+        </View >
     )
 }
 
