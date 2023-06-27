@@ -1,12 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { ImageBackground, Text, View } from 'react-native'
-import React from 'react'
-import MainButton from '../components/Button/MainButton'
-import styles from './Screens.styles'
+import { ImageBackground, Text, View } from 'react-native';
+import React from 'react';
+import MainButton from '../components/Button/MainButton';
+import styles from './Screens.styles';
 const WelcomeScreen = ({ navigation }) => {
     const goToLogin = () => {
         navigation.navigate('LoginScreen');
-    }
+    };
     return (
 
         <ImageBackground source={require('../assests/images/welcomeScreen.jpg')} style={styles.backgroundImage}>
@@ -17,8 +17,8 @@ const WelcomeScreen = ({ navigation }) => {
                 </View>
             </View>
         </ImageBackground >
-    )
-}
+    );
+};
 
-export default WelcomeScreen
+export default WelcomeScreen;
 

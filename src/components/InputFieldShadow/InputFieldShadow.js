@@ -8,8 +8,8 @@ const InputFieldShadow = (props) => {
         <View style={styles.inputFieldView}>
             {props.input}
         </View>
-    )
-}
+    );
+};
 
 export default InputFieldShadow;
 

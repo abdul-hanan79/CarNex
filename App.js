@@ -1,12 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { Platform } from 'react-native';
+import { Platform, View } from 'react-native';
 import { lightColors, createTheme, ThemeProvider } from '@rneui/themed';
 import { NavigationContainer } from '@react-navigation/native';
-import WelcomeScreen from './src/screens/WelcomeScreen';
 import 'react-native-gesture-handler';
-import LoginScreen from './src/screens/LoginScreen';
-import StackNavigator from './src/navigation/StackNavigator';
-import SignupScreen from './src/screens/SignupScreen';
+import PhoneVerification from './src/screens/PhoneVerificationScreen';
+import HomeScreen from './src/screens/HomeScreen';
+// import StackNavigator from './src/navigation/StackNavigator';
+// import WelcomeScreen from './src/screens/WelcomeScreen';
+
 const theme = createTheme({
   lightColors: {
     ...Platform.select({
@@ -18,12 +19,18 @@ const theme = createTheme({
 
 const App = () => {
   return (
+
     <ThemeProvider theme={theme}>
+
       <NavigationContainer>
         {/* <StackNavigator /> */}
-        <SignupScreen />
+        {/* <WelcomeScreen/> */}
+        {/* <PhoneVerification /> */}
+        <HomeScreen/>
       </NavigationContainer>
+
     </ThemeProvider>
+
   );
 };
 export default App;

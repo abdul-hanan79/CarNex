@@ -11,11 +11,12 @@ const useSignup = () => {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+    const [passwordMessage, setPasswordMessage] = useState('')
     const handlePhoneNumberChange = (number) => {
         setPhoneNumber(number);
     };
-    const goToLogin = () => {
-        console.warn('go to login page');
+    const goToLogin = (navigation) => {
+        navigation.navigate("LoginScreen")
     };
     const goToVerification = () => {
         console.warn('go to verfication page');
@@ -28,6 +29,23 @@ const useSignup = () => {
     };
     const clearInputFieldHandler = (setItem) => {
         setItem('');
+    };
+    const comparePassword = () => {
+        console.log("value of password", password)
+        console.log("type of password", typeof (password))
+
+        console.log("value of confirm password", confirmPassword)
+        console.log("type of  confirm password", typeof (confirmPassword))
+
+        if (password == confirmPassword) {
+            console.log("if is running");
+            setPasswordMessage("password matched");
+        }
+        else {
+            console.log("else is running");
+            setPasswordMessage("password not matched")
+        }
+
     };
     return {
         email,
@@ -46,11 +64,14 @@ const useSignup = () => {
         setPassword,
         showPassword,
         showConfirmPassword,
+        passwordMessage,
         goToLogin,
         goToVerification,
         showPasswordHandler,
         showConfirmPasswordHandler,
         clearInputFieldHandler,
+        comparePassword,
+
     };
 };
 

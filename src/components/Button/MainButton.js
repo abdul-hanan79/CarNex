@@ -12,14 +12,15 @@ const MainButton = (props) => {
       onPress={props.onPress}
       buttonStyle={{
         backgroundColor: colors.secondary,
-        borderColor: 'white',
+        borderColor: colors.secondary,
+        // borderWidth:7
         // borderRadius: 15,
       }}
       containerStyle={{
         width: 200,
         marginHorizontal: 50,
         marginVertical: 0,
-        backgroundColor: '#FFFFFF',
+        // backgroundColor: 'red',
         borderRadius: 20,
         elevation: 5, // Controls the shadow depth
         shadowColor: '#000000', // Shadow color
