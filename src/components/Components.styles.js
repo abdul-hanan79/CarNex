@@ -21,6 +21,20 @@ const styles = StyleSheet.create({
 
 
     },
+    chip: {
+        width: 'auto',
+    },
+    shadow: {
+        borderRadius: 10,
+        elevation: 5, // Controls the shadow depth
+        shadowColor: '#000000', // Shadow color
+        shadowOpacity: 0.3, // Shadow opacity
+        shadowRadius: 5, // Shadow radius
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+    }
 });
 
 export default styles;

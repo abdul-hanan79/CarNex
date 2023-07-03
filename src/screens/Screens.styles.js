@@ -84,7 +84,8 @@ const styles = StyleSheet.create({
         fontSize: 46,
         fontWeight: 'bold',
         marginBottom: 10,
-        color: 'white',
+        // color: 'white',
+        color:colors.heading,
     },
     // button: {
     //     backgroundColor: '#f4511e',
@@ -122,7 +123,8 @@ const styles = StyleSheet.create({
     },
     para: {
         fontSize: 20,
-    }
+    },
+
 });
 
 export default styles;
