@@ -3,6 +3,7 @@ import { View, Text, ScrollView } from 'react-native'
 import React from 'react'
 import styles from './Screens.styles';
 import CategoryButton from '../components/CategoryButton/CategoryButton';
+import CarDetailsCard from '../components/CarDetailsCard/CarDetailsCard';
 
 const HomeScreen = () => {
   return (
@@ -23,8 +24,12 @@ const HomeScreen = () => {
         </View>
       </View>
       <View>
-        <Text style={styles.title}>Featured Cars</Text>
-        
+        <Text style={[styles.title]}>Featured Cars</Text>
+
+        <View>
+          <CarDetailsCard />
+        </View>
+
       </View>
 
     </View>

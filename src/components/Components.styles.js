@@ -34,7 +34,15 @@ const styles = StyleSheet.create({
             width: 0,
             height: 2,
         },
-    }
+    },
+    carDetailsCard: {
+        borderRadius: 10,
+        padding: 0
+    },
+    carDetails: {
+        color: colors.text,
+        backgroundColor:'red',
+    },
 });
 
 export default styles;
