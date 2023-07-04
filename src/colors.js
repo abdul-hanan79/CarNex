@@ -5,6 +5,7 @@ export const colors = {
     secondary: '#1E5128',
     background: '#ffffff',
     text: '#000000',
+    lightText:'#D8E9A8',
     // heading: '#D8E9A8',
-     heading: 'black',
+    heading: '#000000',
 };

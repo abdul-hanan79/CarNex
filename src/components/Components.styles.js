@@ -18,8 +18,6 @@ const styles = StyleSheet.create({
             width: 0,
             height: 2,
         },
-
-
     },
     chip: {
         width: 'auto',
@@ -37,12 +35,30 @@ const styles = StyleSheet.create({
     },
     carDetailsCard: {
         borderRadius: 10,
-        padding: 0
+        padding: 0,
+        // color:'black',
     },
     carDetails: {
-        color: colors.text,
-        backgroundColor:'red',
+        width: '100%',
+        // marginTop:10,
+        padding: 15,
+        // color: colors.text,
+        // backgroundColor:'red',
     },
+    cardTitle: {
+        color: colors.text,
+        fontSize: 18
+    },
+    cardPrice: {
+        color: colors.heading,
+        fontSize: 16
+    },
+    cardText: {
+        color: colors.lightText,
+    },
+    firstBadge: { borderRadius: 0, backgroundColor: 'red', borderTopRightRadius: 10, borderBottomRightRadius: 10, borderTopLeftRadius: 10, borderColor: 'red' },
+    secondBadge: { borderRadius: 0, backgroundColor: 'red', borderTopRightRadius: 10, borderBottomRightRadius: 10, borderColor: "red" }
+
 });
 
 export default styles;

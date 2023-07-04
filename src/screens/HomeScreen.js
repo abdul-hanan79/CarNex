@@ -16,10 +16,10 @@ const HomeScreen = () => {
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ overflow: 'hidden' }}>
             <CategoryButton title="HeachBack" />
             <CategoryButton title="HeachBack" />
+            {/* <CategoryButton title="HeachBack" />
             <CategoryButton title="HeachBack" />
             <CategoryButton title="HeachBack" />
-            <CategoryButton title="HeachBack" />
-            <CategoryButton title="HeachBack" />
+            <CategoryButton title="HeachBack" /> */}
           </ScrollView>
         </View>
       </View>
