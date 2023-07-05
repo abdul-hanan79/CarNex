@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
         // backgroundColor: "red",
         alignItems: 'center',
         justifyContent: 'space-evenly',
+        flexWrap:'wrap'
         // backgroundColor: 'red',
         // padding: {
         //     top: 50,

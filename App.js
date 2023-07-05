@@ -3,13 +3,15 @@ import { Platform, View } from 'react-native';
 import { lightColors, createTheme, ThemeProvider } from '@rneui/themed';
 import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-gesture-handler';
-import PhoneVerification from './src/screens/PhoneVerificationScreen';
+// import PhoneVerification from './src/screens/PhoneVerificationScreen';
 import HomeScreen from './src/screens/HomeScreen';
-import WelcomeScreen from './src/screens/WelcomeScreen';
-import LoginScreen from './src/screens/LoginScreen';
-import SignupScreen from './src/screens/SignupScreen';
+import { TabNavigator } from './src/navigation/TabNavigator';
+// import WelcomeScreen from './src/screens/WelcomeScreen';
+// import LoginScreen from './src/screens/LoginScreen';
+// import SignupScreen from './src/screens/SignupScreen';
 // import StackNavigator from './src/navigation/StackNavigator';
 // import WelcomeScreen from './src/screens/WelcomeScreen';
+// import { StatusBar } from 'react-native';
 
 const theme = createTheme({
   lightColors: {
@@ -26,14 +28,10 @@ const App = () => {
     <ThemeProvider theme={theme}>
 
       <NavigationContainer>
-        {/* <StackNavigator /> */}
-        {/* <WelcomeScreen/> */}
-        {/* <LoginScreen/> */}
-        {/* <SignupScreen/> */}
-        {/* <PhoneVerification /> */}
-        <HomeScreen/>
+        {/* <HomeScreen />
+         */}
+        <TabNavigator/>
       </NavigationContainer>
-
     </ThemeProvider>
 
   );

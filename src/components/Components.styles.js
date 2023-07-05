@@ -35,29 +35,53 @@ const styles = StyleSheet.create({
     },
     carDetailsCard: {
         borderRadius: 10,
-        padding: 0,
+        // padding: 0,
         // color:'black',
+        // width: '100%',
+        // height: 153.60,
     },
     carDetails: {
-        width: '100%',
+        // width: 'inherit',
         // marginTop:10,
-        padding: 15,
+        // padding: 15,
+        paddingLeft: 15
         // color: colors.text,
         // backgroundColor:'red',
     },
     cardTitle: {
         color: colors.text,
-        fontSize: 18
+        fontSize: 24,
     },
     cardPrice: {
         color: colors.heading,
-        fontSize: 16
+        fontSize: 16,
     },
     cardText: {
         color: colors.lightText,
+        fontSize:16,
     },
-    firstBadge: { borderRadius: 0, backgroundColor: 'red', borderTopRightRadius: 10, borderBottomRightRadius: 10, borderTopLeftRadius: 10, borderColor: 'red' },
-    secondBadge: { borderRadius: 0, backgroundColor: 'red', borderTopRightRadius: 10, borderBottomRightRadius: 10, borderColor: "red" }
+    firstBadge: {
+        borderRadius: 0,
+        backgroundColor: 'red',
+        borderTopRightRadius: 10,
+        borderBottomRightRadius: 10,
+        borderTopLeftRadius: 10,
+        borderColor: 'red',
+    },
+    secondBadge: {
+        borderRadius: 0,
+        backgroundColor: 'red',
+        borderTopRightRadius: 10,
+        borderBottomRightRadius: 10,
+        borderColor: 'red',
+    },
+    thirdBadge: {
+        backgroundColor: colors.lightBackground,
+        height:35,
+        width:35,
+        borderRadius:40,
+        
+    }
 
 });
 

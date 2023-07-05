@@ -12,32 +12,33 @@ import ChipBox from '../ChipBox/ChipBox';
 const CarDetailsCard = (props) => {
     return (
 
-        <Card containerStyle={[styles.shadow, styles.carDetailsCard]} wrapperStyle={{}}>
+        <Card containerStyle={[styles.shadow, styles.carDetailsCard,]} wrapperStyle={{}}>
             {/* <Card.Divider /> */}
             <View
                 style={{
                     position: "relative",
-                    alignItems: "flex-start"
+                    alignItems: "flex-start",
+                    flexDirection: 'row',
                 }}
             >
                 <Image
-                    style={{ width: "100%", height: 150, borderRadius: 10 }}
+                    style={{ width: 150, height: 150, borderRadius: 10 }}
                     resizeMode="cover"
                     source={{
-                        uri:
-                            "https://img.etimg.com/thumb/msid-69429504,width-1070,height-580,imgsize-586493,overlay-etpanache/photo.jpg"
+                        uri: props.carImage,
                     }}
                 />
-                <View style={styles.carDetails}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Card.FeaturedSubtitle style={styles.cardTitle}>{props.carName}</Card.FeaturedSubtitle>
-                        <Card.FeaturedSubtitle style={styles.cardPrice}>PKR {props.price}/day</Card.FeaturedSubtitle>
-                    </View>
-                    <Card.Title style={{ textAlign: 'left' }}>Range Rover Sport SVR</Card.Title>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <ChipBox component={<Text style={styles.cardText}><Icon name="location-arrow" size={20} color="black" style={{ marginLeft: 5 }} />  Faisalabad</Text>} />
-                        <ChipBox component={<Text style={styles.cardText}><Icon name="gear" size={20} color="black" style={{ marginLeft: 5 }} />  Auto</Text>} />
-
+                <View style={[styles.carDetails,
+                    // { backgroundColor: 'yellow' }
+                ]}>
+                    {/* <View style={{ flexDirection: 'column', flexWrap: 'wrap' }}> */}
+                    <Card.FeaturedSubtitle style={styles.cardTitle}>{props.carName}</Card.FeaturedSubtitle>
+                    <Card.FeaturedSubtitle style={styles.cardPrice}>PKR {props.price}/day</Card.FeaturedSubtitle>
+                    {/* </View> */}
+                    <Card.Title style={{ textAlign: 'left' }}>{props.variant}</Card.Title>
+                    <View style={{ flexDirection: 'row', gap: 10 }}>
+                        <ChipBox component={<Text style={styles.cardText}><Icon name="location-arrow" size={20} color="#ffff" style={{ marginLeft: 5 }} />  {props.location}</Text>} />
+                        <ChipBox component={<Text style={styles.cardText}><Icon name="gear" size={20} color="#ffff" style={{ marginLeft: 5 }} /> {props.gearType}</Text>} />
                     </View>
                 </View>
                 <Badge
@@ -51,6 +52,11 @@ const CarDetailsCard = (props) => {
                     status="success" value="Insured"
                     containerStyle={{ position: 'absolute', top: 20, left: 1 }}
                     badgeStyle={styles.secondBadge}
+                />
+                <Badge
+                    value={<Icon name="heart" size={20} color="#ffff" />}
+                    containerStyle={{ position: 'absolute', top: 0, right: 0 }}
+                    badgeStyle={styles.thirdBadge}
                 />
             </View>
         </Card>
