@@ -8,5 +8,7 @@ export const colors = {
     lightText: '#ffff',
     // heading: '#D8E9A8',
     heading: '#000000',
-    lightBackground: '#bdbdbd'
+    lightBackground: '#bdbdbd',
+    lightColor:"#ffffff",
+    darkColor:"#000000"
 };

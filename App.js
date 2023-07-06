@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-gesture-handler';
 // import PhoneVerification from './src/screens/PhoneVerificationScreen';
 import HomeScreen from './src/screens/HomeScreen';
-import { TabNavigator } from './src/navigation/TabNavigator';
+import TabNavigator from './src/navigation/TabNavigator';
 // import WelcomeScreen from './src/screens/WelcomeScreen';
 // import LoginScreen from './src/screens/LoginScreen';
 // import SignupScreen from './src/screens/SignupScreen';
@@ -28,9 +28,9 @@ const App = () => {
     <ThemeProvider theme={theme}>
 
       <NavigationContainer>
-        {/* <HomeScreen />
-         */}
-        <TabNavigator/>
+       <TabNavigator/>
+        {/* <HomeScreen/> */}
+        
       </NavigationContainer>
     </ThemeProvider>
 
