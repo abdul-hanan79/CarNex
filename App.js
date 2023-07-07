@@ -28,7 +28,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
 
       <NavigationContainer>
-       <TabNavigator/>
+       {/* <TabNavigator/> */}
         {/* <HomeScreen/> */}
         
       </NavigationContainer>
