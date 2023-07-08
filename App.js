@@ -12,7 +12,7 @@ import TabNavigator from './src/navigation/TabNavigator';
 // import StackNavigator from './src/navigation/StackNavigator';
 // import WelcomeScreen from './src/screens/WelcomeScreen';
 // import { StatusBar } from 'react-native';
-
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 const theme = createTheme({
   lightColors: {
     ...Platform.select({
@@ -24,16 +24,18 @@ const theme = createTheme({
 
 const App = () => {
   return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
 
-    <ThemeProvider theme={theme}>
 
-      <NavigationContainer>
-       {/* <TabNavigator/> */}
-        {/* <HomeScreen/> */}
-        
-      </NavigationContainer>
-    </ThemeProvider>
+      <ThemeProvider theme={theme}>
 
+        <NavigationContainer>
+          <TabNavigator />
+          {/* <HomeScreen/> */}
+
+        </NavigationContainer>
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 };
 export default App;

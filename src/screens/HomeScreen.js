@@ -7,7 +7,7 @@ import CarDetailsCard from '../components/CarDetailsCard/CarDetailsCard';
 
 const HomeScreen = () => {
   return (
-    <View style={[styles.container, { backgroundColor: 'pink' }]}>
+    <View style={{...styles.container,}}>
       <ScrollView>
         <View>
           <Text style={[styles.title,]}>Get Your Ride!</Text>
