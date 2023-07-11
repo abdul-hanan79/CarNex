@@ -11,6 +11,7 @@ import SearchScreen from '../screens/SearchScreen';
 import SearchTabBarIcon from '../components/SearchTabBarIcon/SearchTabBarIcon';
 import UploadCarDetailsScreen from '../screens/UploadCarDetailsScreen';
 import { colors } from '../colors';
+import HeaderIconText from '../components/HeaderIconText/HeaderIconText';
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
@@ -38,30 +39,22 @@ const TabNavigator = () => {
                 headerTitleStyle: {
                     fontSize: 36,
                     fontWeight: 'bold',
-
                 }
             }}
         >
-            <Tab.Screen
-                name="Home"
-                component={HomeScreen}
-                options={{
-                    tabBarLabel: 'Home',
-                    tabBarBadge: 3,
-                    tabBarIcon: ({ color, size }) => (
-                        // <MaterialCommunityIcons name="home" color={color} size={size} />\
-                        <FontAwesomeIcon icon={faHouse} size={26} color={color} />
-                    ),
-                    headerTitle: 'Home',
-                    headerStyle: {
-                        backgroundColor: 'transparent',
-                    },
-                    headerTitleStyle: {
-                        fontSize: 36,
-                        fontWeight: 'bold',
+            <Tab.Screen name="Home" component={HomeScreen} options={{
+                tabBarLabel: 'Home',
+                tabBarBadge: 3,
+                tabBarIcon: ({ color, size }) => (
+                    // <MaterialCommunityIcons name="home" color={color} size={size} />\
+                    <FontAwesomeIcon icon={faHouse} size={26} color={color} />
+                ),
+                // headerTitle: 'Home',
+                header: ({ scene }) => (
+                    <HeaderIconText title="Home" />
+                )
 
-                    }
-                }}
+            }}
             />
             <Tab.Screen
                 name="Add"
@@ -72,11 +65,12 @@ const TabNavigator = () => {
                         // <MaterialCommunityIcons name="home" color={color} size={size} />\
                         <FontAwesomeIcon icon={faSquarePlus} size={26} color={color} />
                     ),
-                    headerTitle: 'Home',
+                    header: ({ scene }) => (
+                        <HeaderIconText title="Add Car Details" />
+                    )
                 }}
             />
-            <Tab.Screen
-                name="Search"
+            <Tab.Screen name="Search"
                 component={SearchScreen}
                 options={{
                     tabBarLabel: 'SearchScreen',
@@ -85,7 +79,9 @@ const TabNavigator = () => {
                             <FontAwesomeIcon icon={faSearch} size={26} color="#fff" />
                         </SearchTabBarIcon>
                     ),
-                    headerTitle: 'Search',
+                    header: ({ scene }) => (
+                        <HeaderIconText title="Search" />
+                    )
 
                 }}
             />
@@ -99,7 +95,9 @@ const TabNavigator = () => {
 
                     ),
                     tabBarBadge: 3,
-                    headerTitle: 'Message',
+                    header: ({ scene }) => (
+                        <HeaderIconText title="Message" />
+                    )
 
                 }}
             />
@@ -112,7 +110,9 @@ const TabNavigator = () => {
                         <FontAwesomeIcon icon={faHeadset} size={26} color={color} />
 
                     ),
-                    headerTitle: 'Help',
+                    header: ({ scene }) => (
+                        <HeaderIconText title="Help" />
+                    )
 
                 }}
             />

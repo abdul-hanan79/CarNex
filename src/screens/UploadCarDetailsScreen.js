@@ -5,7 +5,10 @@ import React from 'react'
 const UploadCarDetailsScreen = () => {
     return (
         <View>
-            <Text>UploadCarDetailsScreen</Text>
+            <Text>Upload CarDetails Screen</Text>
+            <Text>Upload CarDetails Screen</Text>
+            <Text>Upload CarDetails Screen</Text>
+            <Text>Upload CarDetails Screen</Text>
         </View>
     )
 }

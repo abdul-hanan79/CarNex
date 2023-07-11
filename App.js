@@ -13,6 +13,8 @@ import TabNavigator from './src/navigation/TabNavigator';
 // import WelcomeScreen from './src/screens/WelcomeScreen';
 // import { StatusBar } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+// import DrawerNavigator from './src/navigation/DrawerNavigator';
+
 const theme = createTheme({
   lightColors: {
     ...Platform.select({
@@ -24,14 +26,13 @@ const theme = createTheme({
 
 const App = () => {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-
-
+    <GestureHandlerRootView style={{ flex: 1,paddingLeft:10,paddingRight:10, }}>
       <ThemeProvider theme={theme}>
 
         <NavigationContainer>
           <TabNavigator />
           {/* <HomeScreen/> */}
+          {/* <DrawerNavigator /> */}
 
         </NavigationContainer>
       </ThemeProvider>

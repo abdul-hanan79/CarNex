@@ -4,17 +4,20 @@ import React from 'react'
 import styles from './Screens.styles';
 import CategoryButton from '../components/CategoryButton/CategoryButton';
 import CarDetailsCard from '../components/CarDetailsCard/CarDetailsCard';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   return (
-    <View style={{...styles.container,}}>
+    <View style={{ ...styles.container, }}>
       <ScrollView>
         <View>
           <Text style={[styles.title,]}>Get Your Ride!</Text>
           {/* Category Button */}
           <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 3 }}>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ overflow: 'hidden' }}>
-              <CategoryButton title="HeachBack" />
+              <TouchableOpacity onPress={()=>navigation.openDrawer()}>
+                <CategoryButton title="HeachBack" />
+              </TouchableOpacity>
               <CategoryButton title="HeachBack" />
             </ScrollView>
           </View>
