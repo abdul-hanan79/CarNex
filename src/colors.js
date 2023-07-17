@@ -10,5 +10,5 @@ export const colors = {
     heading: '#000000',
     lightBackground: '#bdbdbd',
     lightColor:"#ffffff",
-    darkColor:"#000000"
+    darkColor:"#000000",
 };

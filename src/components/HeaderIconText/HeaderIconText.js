@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     headerContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+        backgroundColor:'#ffff'
         // justifyContent:'center',
     },
     icon: {

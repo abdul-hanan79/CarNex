@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 // /* eslint-disable prettier/prettier */
-// import { createDrawerNavigator } from '@react-navigation/drawer';
+// // import { createDrawerNavigator } from '@react-navigation/drawer';
 // import HomeScreen from "../screens/HomeScreen";
 // import HelpScreen from "../screens/HelpScreen";
 // import MessageScreen from "../screens/MessageScreen";
@@ -8,6 +8,7 @@
 // import CustomDrawer from "../components/CustomDrawer/CustomDrawer";
 // import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 // import { faUser } from "@fortawesome/free-solid-svg-icons";
+// import { createDrawerNavigator } from "@react-navigation/drawer";
 
 // const Drawer = createDrawerNavigator();
 // const DrawerNavigator = () => {
