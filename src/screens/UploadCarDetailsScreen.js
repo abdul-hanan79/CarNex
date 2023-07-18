@@ -1,14 +1,22 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
-import { View, Text, ScrollView, TextInput, TouchableOpacity, KeyboardAvoidingView, TouchableWithoutFeedback, Pressable } from 'react-native';
+import { View, Text, ScrollView, FlatList, TextInput, TouchableOpacity, KeyboardAvoidingView, TouchableWithoutFeedback, Pressable } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import DropDownPicker from 'react-native-dropdown-picker';
 import useLogin from '../customHooks/useLogin';
 
 const CarForm = () => {
-    const [open, setOpen] = useState(false)
-    const { handleScreenPress } = useLogin()
+    const [open, setOpen] = useState(false);
+    const [open1, setOpen1] = useState(false);
+    const [open2, setOpen2] = useState(false);
+    const { handleScreenPress } = useLogin();
+    const [open3, setOpen3] = useState(false);
+    const [value, setValue] = useState(null);
+    const [items, setItems] = useState([
+        { label: 'Apple', value: 'apple' },
+        { label: 'Banana', value: 'banana' }
+    ]);
     const initialValues = {
         // ...other field values
         carMake: '',
@@ -32,90 +40,108 @@ const CarForm = () => {
 
     return (
         <View style={[styles.container, { backgroundColor: 'white' }]}>
-            <ScrollView contentContainerStyle={styles.scrollViewContent}>
-                <TouchableWithoutFeedback onPress={handleScreenPress}>
-                    <KeyboardAvoidingView style={[styles.inputContainer]} behavior="padding" >
-                        <Formik
-                            initialValues={initialValues}
-                            validationSchema={validationSchema}
-                            onSubmit={handleSubmit}
-                        >
-                            {({ values, handleChange, handleSubmit, errors, touched }) => (
-                                <View style={styles.container}>
-                                    {/* ...other form fields */}
 
-                                    <View style={styles.fieldContainer}>
-                                        <Text style={styles.label}>Car Make</Text>
-                                        <DropDownPicker
-                                        open={open}
-                                        setOpen={setOpen}
-                                            items={[
-                                                { label: 'Make 1', value: 'make1' },
-                                                { label: 'Make 2', value: 'make2' },
-                                                // Add more make options here
-                                            ]}
-                                            defaultValue={values.carMake}
-                                            containerStyle={{ height: 40, marginBottom: 10 }}
-                                            style={{ backgroundColor: '#fafafa' }}
-                                            dropDownStyle={{ backgroundColor: '#fafafa' }}
-                                            onChangeItem={(item) => handleChange('carMake')(item.value)}
-                                        />
-                                        {errors.carMake && touched.carMake && (
-                                            <Text style={styles.error}>{errors.carMake}</Text>
-                                        )}
+            <TouchableWithoutFeedback onPress={handleScreenPress}>
+                <KeyboardAvoidingView style={[styles.inputContainer]} behavior="padding" >
+
+                    <FlatList
+                        data={[1]} // Dummy data to enable scrolling
+                        renderItem={() => (
+                            <Formik
+                                initialValues={initialValues}
+                                validationSchema={validationSchema}
+                                onSubmit={handleSubmit}
+                            >
+                                {({ values, handleChange, setFieldValue, errors, touched }) => (
+
+                                    <View style={styles.container}>
+                                        {/* ...other form fields */}
+                                        <View style={[styles.fieldContainer]}>
+                                            <Text style={styles.label}>Car Make</Text>
+                                            <DropDownPicker
+                                                open={open}
+                                                setOpen={setOpen}
+                                                items={[
+                                                    { label: 'Make 1', value: 'make1' },
+                                                    { label: 'Make 2', value: 'make2' },
+                                                    // Add more make options here
+                                                ]}
+                                                value={values.carMake}
+                                                containerStyle={[styles.dropDownContainerStyle,]}
+                                                style={[styles.dropDownMenuStyle, { zIndex: open ? 1 : 0 }]}
+                                                dropDownStyle={styles.dropDownContainer}
+                                                // onChangeItem={(item) => handleChange('carMake')(item.value)}
+                                                onChangeValue={handleChange('carMake')} // Use "setFieldValue" to update the form value
+                                            // setValue={values.carMa}
+                                            />
+                                            {errors.carMake && touched.carMake && (
+                                                <Text style={styles.error}>{errors.carMake}</Text>
+                                            )}
+                                        </View>
+
+                                        <View style={[styles.fieldContainer,]}>
+                                            <Text style={styles.label}>Car Model</Text>
+                                            <DropDownPicker
+                                                open={open1}
+                                                setOpen={setOpen1}
+                                                items={[
+                                                    { label: 'Make 1', value: 'make1' },
+                                                    { label: 'Make 2', value: 'make2' },
+                                                    // Add more make options here
+                                                ]}
+                                                defaultValue={values.carModel}
+                                                containerStyle={[styles.dropDownContainerStyle, { zIndex: open ? 1 : 0 }]}
+
+                                                style={[styles.dropDownMenuStyle, { zIndex: open ? 1 : 0 }]}
+
+                                                dropDownStyle={styles.dropDownContainer}
+                                                onChangeItem={(item) => handleChange('carModel')(item.value)}
+                                            // setValue={values.carMa}
+                                            />
+                                            {errors.carModel && touched.carModel && (
+                                                <Text style={styles.error}>{errors.carModel}</Text>
+                                            )}
+                                        </View>
+
+                                        <View style={[styles.fieldContainer,]}>
+                                            <Text style={styles.label}>Model Year</Text>
+                                            <DropDownPicker
+                                                open={open2}
+                                                setOpen={setOpen2}
+                                                items={[
+                                                    { label: 'Make 1', value: 'make1' },
+                                                    { label: 'Make 2', value: 'make2' },
+                                                    // Add more make options here
+                                                ]}
+                                                defaultValue={values.modelYear}
+                                                containerStyle={[styles.dropDownContainerStyle,]}
+                                                style={[styles.dropDownMenuStyle, { zIndex: open ? 1 : 0 }]}
+                                                dropDownStyle={[styles.dropDownContainer, { zIndex: open ? 6000 : 0 }]}
+                                                onChangeItem={(item) => handleChange('modelYear')(item.value)}
+                                            // setValue={values.carMa}
+                                            />
+                                            {errors.modelYear && touched.modelYear && (
+                                                <Text style={styles.error}>{errors.modelYear}</Text>
+                                            )}
+                                        </View>
+
+                                        {/* ...continue with other form fields */}
+
+                                        {/* Submit Button */}
+                                        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+                                            <Text style={styles.buttonText}>Submit</Text>
+                                        </TouchableOpacity>
                                     </View>
+                                )}
+                            </Formik>
+                        )}
+                        keyExtractor={(item, index) => index.toString()}
+                    />
 
-                                    <View style={styles.fieldContainer}>
-                                        <Text style={styles.label}>Car Model</Text>
-                                        <DropDownPicker
-                                            items={[
-                                                { label: 'Model 1', value: 'model1' },
-                                                { label: 'Model 2', value: 'model2' },
-                                                // Add more model options here
-                                            ]}
-                                            defaultValue={values.carModel}
-                                            containerStyle={{ height: 40, marginBottom: 10 }}
-                                            style={{ backgroundColor: '#fafafa' }}
-                                            dropDownStyle={{ backgroundColor: '#fafafa' }}
-                                            onChangeItem={(item) => handleChange('carModel')(item.value)}
-                                        />
-                                        {errors.carModel && touched.carModel && (
-                                            <Text style={styles.error}>{errors.carModel}</Text>
-                                        )}
-                                    </View>
+                </KeyboardAvoidingView>
+            </TouchableWithoutFeedback>
 
-                                    <View style={styles.fieldContainer}>
-                                        <Text style={styles.label}>Model Year</Text>
-                                        <DropDownPicker
-                                            items={[
-                                                { label: 'Year 1', value: 'year1' },
-                                                { label: 'Year 2', value: 'year2' },
-                                                // Add more year options here
-                                            ]}
-                                            defaultValue={values.modelYear}
-                                            containerStyle={{ height: 40, marginBottom: 10 }}
-                                            style={{ backgroundColor: '#fafafa' }}
-                                            dropDownStyle={{ backgroundColor: '#fafafa' }}
-                                            onChangeItem={(item) => handleChange('modelYear')(item.value)}
-                                        />
-                                        {errors.modelYear && touched.modelYear && (
-                                            <Text style={styles.error}>{errors.modelYear}</Text>
-                                        )}
-                                    </View>
-
-                                    {/* ...continue with other form fields */}
-
-                                    {/* Submit Button */}
-                                    <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                                        <Text style={styles.buttonText}>Submit</Text>
-                                    </TouchableOpacity>
-                                </View>
-                            )}
-                        </Formik>
-                    </KeyboardAvoidingView>
-                </TouchableWithoutFeedback>
-            </ScrollView>
-        </View>
+        </View >
     );
 };
 
@@ -167,6 +193,9 @@ const styles = {
         fontSize: 16,
         fontWeight: 'bold',
     },
+    dropDownContainer: { backgroundColor: '#3f3', fontSize: 28, },
+    dropDownContainerStyle: { height: 70, marginBottom: 10, backgroundColor: 'red', },
+    dropDownMenuStyle: { backgroundColor: '#eeee' }
 }
 export default CarForm;
 
