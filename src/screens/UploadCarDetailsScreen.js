@@ -56,32 +56,13 @@ const CarForm = () => {
 
                                     <View style={styles.container}>
                                         {/* ...other form fields */}
-                                        <View style={[styles.fieldContainer]}>
-                                            <Text style={styles.label}>Car Make</Text>
-                                            <DropDownPicker
-                                                open={open}
-                                                setOpen={setOpen}
-                                                items={[
-                                                    { label: 'Make 1', value: 'make1' },
-                                                    { label: 'Make 2', value: 'make2' },
-                                                    // Add more make options here
-                                                ]}
-                                                value={values.carMake}
-                                                containerStyle={[styles.dropDownContainerStyle,]}
-                                                style={[styles.dropDownMenuStyle, { zIndex: open ? 1 : 0 }]}
-                                                dropDownStyle={styles.dropDownContainer}
-                                                // onChangeItem={(item) => handleChange('carMake')(item.value)}
-                                                onChangeValue={handleChange('carMake')} // Use "setFieldValue" to update the form value
-                                            // setValue={values.carMa}
-                                            />
-                                            {errors.carMake && touched.carMake && (
-                                                <Text style={styles.error}>{errors.carMake}</Text>
-                                            )}
-                                        </View>
 
                                         <View style={[styles.fieldContainer,]}>
                                             <Text style={styles.label}>Car Model</Text>
                                             <DropDownPicker
+                                                placeholder='Select the Car Model'
+                                                // name="Car Model"
+                                                // zIndex={10000}
                                                 open={open1}
                                                 setOpen={setOpen1}
                                                 items={[
@@ -93,37 +74,16 @@ const CarForm = () => {
                                                 containerStyle={[styles.dropDownContainerStyle, { zIndex: open ? 1 : 0 }]}
 
                                                 style={[styles.dropDownMenuStyle, { zIndex: open ? 1 : 0 }]}
-
                                                 dropDownStyle={styles.dropDownContainer}
-                                                onChangeItem={(item) => handleChange('carModel')(item.value)}
-                                            // setValue={values.carMa}
+                                                onChangeItem={(item) => handleChange('carModel', item.value)}
+                                                setValue={values.carModel}
+
                                             />
                                             {errors.carModel && touched.carModel && (
                                                 <Text style={styles.error}>{errors.carModel}</Text>
                                             )}
                                         </View>
 
-                                        <View style={[styles.fieldContainer,]}>
-                                            <Text style={styles.label}>Model Year</Text>
-                                            <DropDownPicker
-                                                open={open2}
-                                                setOpen={setOpen2}
-                                                items={[
-                                                    { label: 'Make 1', value: 'make1' },
-                                                    { label: 'Make 2', value: 'make2' },
-                                                    // Add more make options here
-                                                ]}
-                                                defaultValue={values.modelYear}
-                                                containerStyle={[styles.dropDownContainerStyle,]}
-                                                style={[styles.dropDownMenuStyle, { zIndex: open ? 1 : 0 }]}
-                                                dropDownStyle={[styles.dropDownContainer, { zIndex: open ? 6000 : 0 }]}
-                                                onChangeItem={(item) => handleChange('modelYear')(item.value)}
-                                            // setValue={values.carMa}
-                                            />
-                                            {errors.modelYear && touched.modelYear && (
-                                                <Text style={styles.error}>{errors.modelYear}</Text>
-                                            )}
-                                        </View>
 
                                         {/* ...continue with other form fields */}
 
