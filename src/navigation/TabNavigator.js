@@ -150,6 +150,7 @@ const TabNavigator = () => {
                     }}
                 />
             </Tab.Navigator>
+        
         </View>);
 }
 const style = StyleSheet.create({

@@ -8,6 +8,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import HomeScreen from './src/screens/HomeScreen';
 // import DrawerNavigator from './src/navigation/DrawerNavigator';
 
+
 const theme = createTheme({
   lightColors: {
     ...Platform.select({
