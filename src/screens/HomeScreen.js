@@ -1,21 +1,88 @@
 /* eslint-disable prettier/prettier */
-import { View, Text, ScrollView } from 'react-native'
+/* eslint-disable prettier/prettier */
+// import React from 'react';
+// import { View, Text, FlatList, TouchableOpacity, SafeAreaView } from 'react-native';
+// import mainStyles from './Screens.styles';
+// import CarDetailsCard from '../components/CarDetailsCard/CarDetailsCard';
+// import CategoryButton from '../components/CategoryButton/CategoryButton';
+// import useCarDetails from '../customHooks/useCarDetails';
+
+// // Your existing code for CarDetailsCard, CategoryButton, and styles
+
+
+
+// const HomeScreen = ({ navigation }) => {
+//   const { data } = useCarDetails()
+//   const renderHeader = () => {
+//     return (
+//       <View>
+//         <Text style={[mainStyles.title]}>Get Your Ride!</Text>
+//         {/* Category Button */}
+//         <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 3 }}>
+//           {/* Replace with your actual category buttons */}
+//           <TouchableOpacity onPress={() => navigation.openDrawer()}>
+//             <CategoryButton title="HeachBack" />
+//           </TouchableOpacity>
+//           <CategoryButton title="HeachBack" />
+//         </View>
+//       </View>
+//     );
+//   };
+
+//   const renderCarDetailsCard = ({ item }) => {
+//     return (
+//       <View>
+
+//         <CarDetailsCard
+//           carName={item.carName}
+//           price={item.price}
+//           location={item.location}
+//           gearType={item.gearType}
+//           carImage={item.carImage}
+//           variant={item.variant}
+//         />
+//       </View>
+//     );
+//   };
+
+//   return (
+//     <View style={[mainStyles.container, { backgroundColor: 'red' }]}>
+//         <Text style={[mainStyles.title]}>Featured Cars</Text>
+
+//       <FlatList
+//         data={data}
+//         renderItem={renderCarDetailsCard}
+//         keyExtractor={item => item.id}
+//         ListHeaderComponent={renderHeader}
+//       />
+//     </View>
+//   );
+// };
+
+// export default HomeScreen;
+
+
+// /* eslint-disable prettier/prettier */
+import { View, Text, ScrollView, FlatList, SafeAreaView } from 'react-native'
 import React from 'react'
 import styles from './Screens.styles';
 import CategoryButton from '../components/CategoryButton/CategoryButton';
 import CarDetailsCard from '../components/CarDetailsCard/CarDetailsCard';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import useCarDetails from '../customHooks/useCarDetails';
 
 const HomeScreen = ({ navigation }) => {
+  const { data } = useCarDetails();
+  // console.log("data ",data)
   return (
     <View style={{ ...styles.container, }}>
-      <ScrollView>
+      <FlatList data={[1]} renderItem={() => (<View>
         <View>
           <Text style={[styles.title,]}>Get Your Ride!</Text>
           {/* Category Button */}
           <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 3 }}>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ overflow: 'hidden' }}>
-              <TouchableOpacity onPress={()=>navigation.openDrawer()}>
+              <TouchableOpacity onPress={() => navigation.openDrawer()}>
                 <CategoryButton title="HeachBack" />
               </TouchableOpacity>
               <CategoryButton title="HeachBack" />
@@ -26,18 +93,26 @@ const HomeScreen = ({ navigation }) => {
         <View>
           <Text style={[styles.title]}>Featured Cars</Text>
 
-          <View style={{ flexWrap: 'wrap', gap: 10 }}>
-            <CarDetailsCard carName="Range Rover" price="1200" location="Faisalbad" gearType="Auto" carImage="https://img.etimg.com/thumb/msid-69429504,width-1070,height-580,imgsize-586493,overlay-etpanache/photo.jpg" variant="Range Rover Sport SVR" />
-            <CarDetailsCard carName="Range Rover" price="1200" location="Faisalbad" gearType="Auto" carImage="https://img.etimg.com/thumb/msid-69429504,width-1070,height-580,imgsize-586493,overlay-etpanache/photo.jpg" variant="Range Rover Sport SVR" />
-            {/* <CarDetailsCard carName="Range Rover" price="1200" location="Faisalbad" gearType="auto" carImage="https://img.etimg.com/thumb/msid-69429504,width-1070,height-580,imgsize-586493,overlay-etpanache/photo.jpg" variant="Range Rover Sport SVR" />
-            <CarDetailsCard carName="Range Rover" price="1200" location="Faisalbad" gearType="auto" carImage="https://img.etimg.com/thumb/msid-69429504,width-1070,height-580,imgsize-586493,overlay-etpanache/photo.jpg" variant="Range Rover Sport SVR" />
-            <CarDetailsCard carName="Range Rover" price="1200" location="Faisalbad" gearType="auto" carImage="https://img.etimg.com/thumb/msid-69429504,width-1070,height-580,imgsize-586493,overlay-etpanache/photo.jpg" variant="Range Rover Sport SVR" />
-            <CarDetailsCard carName="Range Rover" price="1200" location="Faisalbad" gearType="auto" carImage="https://img.etimg.com/thumb/msid-69429504,width-1070,height-580,imgsize-586493,overlay-etpanache/photo.jpg" variant="Range Rover Sport SVR" />
-            <CarDetailsCard carName="Range Rover" price="1200" location="Faisalbad" gearType="auto" carImage="https://img.etimg.com/thumb/msid-69429504,width-1070,height-580,imgsize-586493,overlay-etpanache/photo.jpg" variant="Range Rover Sport SVR" />
-            <CarDetailsCard carName="Range Rover" price="1200" location="Faisalbad" gearType="auto" carImage="https://img.etimg.com/thumb/msid-69429504,width-1070,height-580,imgsize-586493,overlay-etpanache/photo.jpg" variant="Range Rover Sport SVR" /> */}
+          <View style={{ flexWrap: 'wrap', gap: 20, flex: 1 }}>
+            <SafeAreaView>
+              <FlatList data={data} renderItem={({ item }) => (
+                <TouchableOpacity onPress={() => navigation.navigate('SingleCarDetail', item)}>
+                  <CarDetailsCard carName={item.carName} price={item.price} location={item.location} gearType={item.gearType} carImage={item.carImage} variant={item.variant} />
+                </TouchableOpacity>
+              )}
+                nestedScrollEnabled={true}
+                keyExtractor={item => item.id}
+              >
+              </FlatList>
+            </SafeAreaView>
           </View>
         </View>
-      </ScrollView>
+      </View>)} >
+
+
+
+      </FlatList>
+
     </View>
   );
 };

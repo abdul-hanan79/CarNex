@@ -10,6 +10,7 @@ const MainButton = (props) => {
     <Button
       title={props.title}
       onPress={props.onPress}
+      disabled={!props.disabled ? true : false}
       buttonStyle={{
         backgroundColor: colors.secondary,
         borderColor: colors.secondary,

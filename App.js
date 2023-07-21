@@ -6,6 +6,8 @@ import 'react-native-gesture-handler';
 import TabNavigator from './src/navigation/TabNavigator';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import HomeScreen from './src/screens/HomeScreen';
+import { SafeAreaView, StatusBar, } from 'react-native';
+import StackNavigator from './src/navigation/StackNavigator';
 // import DrawerNavigator from './src/navigation/DrawerNavigator';
 
 
@@ -21,15 +23,19 @@ const theme = createTheme({
 const App = () => {
   return (
     <GestureHandlerRootView style={{ flex: 1, paddingLeft: 10, paddingRight: 10, }}>
-      <ThemeProvider theme={theme}>
-        <NavigationContainer>
+      <SafeAreaView style={{
+        flex: 1,
+        marginTop: 0,
+      }}>
+        <ThemeProvider theme={theme}>
+          <NavigationContainer>
 
-          <TabNavigator />
-          {/* <HomeScreen/> */}
-          {/* <DrawerNavigator /> */}
-        </NavigationContainer>
-      </ThemeProvider>
-    </GestureHandlerRootView>
+            
+            <StackNavigator />
+          </NavigationContainer>
+        </ThemeProvider>
+      </SafeAreaView>
+    </GestureHandlerRootView >
   );
 };
 export default App;

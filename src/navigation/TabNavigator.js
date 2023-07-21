@@ -44,7 +44,7 @@ const TabNavigator = () => {
 
             <Tab.Navigator
 
-                initialRouteName="Add"
+                initialRouteName="Home"
                 backBehavior='history'
                 screenOptions={{
                     // ...tabBarStyle,
@@ -170,9 +170,9 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     visibleTabBar: {
-        position: 'absolute',
+        position: 'relative',
         bottom: 15,
-        left: 20,
+        // left: 20,
         right: 20,
         elevation: 0,
         backgroundColor: '#fff',

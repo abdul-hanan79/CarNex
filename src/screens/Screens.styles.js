@@ -61,7 +61,13 @@ Medium: 11px
 
 import { StyleSheet } from 'react-native';
 import { colors } from '../colors';
-const styles = StyleSheet.create({
+const mainStyles = StyleSheet.create({
+    mainContainer: {
+        flex:1,
+        backgroundColor: '#fff',
+        // padding: 10,
+        marginBottom: 100,
+    },
     backgroundImage: {
         flex: 1,
         resizeMode: 'cover',
@@ -72,7 +78,11 @@ const styles = StyleSheet.create({
         // backgroundColor: "red",
         alignItems: 'center',
         justifyContent: 'space-evenly',
-        flexWrap:'wrap'
+        flexWrap: 'wrap',
+        
+        padding:5,
+        paddingBottom:15,
+        backgroundColor:'#fff'
         // backgroundColor: 'red',
         // padding: {
         //     top: 50,
@@ -86,7 +96,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 10,
         // color: 'white',
-        color:colors.heading,
+        color: colors.heading,
     },
     // button: {
     //     backgroundColor: '#f4511e',
@@ -128,4 +138,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default styles;
+export default mainStyles;

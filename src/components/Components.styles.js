@@ -35,7 +35,9 @@ const styles = StyleSheet.create({
     },
     carDetailsCard: {
         borderRadius: 10,
-        // padding: 0,
+        // backgroundColor:'pink',
+        padding: 10,
+        backgroundColor:'red'
         // color:'black',
         // width: '100%',
         // height: 153.60,
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
     },
     cardText: {
         color: colors.lightText,
-        fontSize:16,
+        fontSize: 16,
     },
     firstBadge: {
         borderRadius: 0,
@@ -77,11 +79,16 @@ const styles = StyleSheet.create({
     },
     thirdBadge: {
         backgroundColor: colors.lightBackground,
-        height:35,
-        width:35,
-        borderRadius:40,
-        
-    }
+        height: 35,
+        width: 35,
+        borderRadius: 40,
+
+    },
+    // GENERAL CLASS
+    heading: {},
+    text: {},
+    para: {},
+
 
 });
 

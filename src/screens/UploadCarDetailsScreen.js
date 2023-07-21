@@ -1,407 +1,385 @@
 /* eslint-disable prettier/prettier */
+import React from 'react';
+import { View, FlatList, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { Formik } from 'formik';
+import { Button } from 'react-native-elements';
+import * as Yup from 'yup';
+import MainButton from '../components/Button/MainButton';
 
+const CarDetailsSchema = Yup.object().shape({
+    carMake: Yup.string().required('Car Make is required'),
+    carModel: Yup.string().required('Car Model is required'),
+    carYear: Yup.number()
+        .typeError('Car Year must be a number')
+        .integer('Car Year must be an integer')
+        .required('Car Year is required')
+        .min(1900, 'Car Year must be at least 1900')
+        .max(new Date().getFullYear(), `Car Year can't be in the future`),
+    carAssembly: Yup.string().required('Car Assembly is required'),
+    carVariant: Yup.string().required('Car Variant is required'),
+    carTransmission: Yup.string().required('Car Transmission is required'),
+    carType: Yup.string().required('Car Type is required'),
+    engineType: Yup.string().required('Engine Type is required'),
+    engineCapacity: Yup.number()
+        .typeError('Engine Capacity must be a number')
+        .positive('Engine Capacity must be a positive number')
+        .required('Engine Capacity is required'),
+    seatingCapacity: Yup.number()
+        .typeError('Seating Capacity must be a number')
+        .integer('Seating Capacity must be an integer')
+        .positive('Seating Capacity must be a positive number')
+        .required('Seating Capacity is required'),
+    bodyColor: Yup.string().required('Body Color is required'),
+    betweenCities: Yup.string().required('Between Cities is required'),
+    registrationCity: Yup.string().required('Registration City is required'),
+    pickupCity: Yup.string().required('Pickup City is required'),
+    driverAvailability: Yup.boolean().required('Driver Availability is required'),
+    carMileage: Yup.number()
+        .typeError('Car Mileage must be a number')
+        .positive('Car Mileage must be a positive number')
+        .required('Car Mileage is required'),
+    carRents: Yup.number()
+        .typeError('Car Rents must be a number')
+        .positive('Car Rents must be a positive number')
+        .required('Car Rents is required'),
+    insured: Yup.boolean().required('Insured status is required'),
+    descriptions: Yup.string().required('Description is required'),
+});
 
-import React, { useEffect, useState } from 'react';
-import {
-    Alert,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
-} from 'react-native';
-import { Dropdown } from 'react-native-element-dropdown';
-import axios from 'axios';
-// import { BASE_URL, API_KEY } from '@env';
-import {} from '@env'
 
 const UploadCarDetailesScreen = () => {
-    const [countryData, setCountryData] = useState([]);
-    const [stateData, setStateData] = useState([]);
-    const [cityData, setCityData] = useState([]);
-    const [country, setCountry] = useState(null);
-    const [state, setState] = useState(null);
-    const [city, setCity] = useState(null);
-    const [countryName, setCountryName] = useState(null);
-    const [stateName, setStateName] = useState(null);
-    const [cityName, setCityName] = useState(null);
-    const [isFocus, setIsFocus] = useState(false);
-
-    useEffect(() => {
-        var config = {
-            method: 'get',
-            url: `${BASE_URL}/countries`,
-            headers: {
-                'X-CSCAPI-KEY': `${API_KEY}`
-            }
-        };
-
-        axios(config)
-            .then(response => {
-                console.log(JSON.stringify(response.data));
-                var count = Object.keys(response.data).length;
-                let countryArray = [];
-                for (var i = 0; i < count; i++) {
-                    countryArray.push({
-                        value: response.data[i].iso2,
-                        label: response.data[i].name,
-                    });
-                }
-                setCountryData(countryArray);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }, []);
-
-    const handleState = countryCode => {
-        var config = {
-            method: 'get',
-            url: `${BASE_URL}/countries/${countryCode}/states`,
-            headers: {
-                'X-CSCAPI-KEY': API_KEY,
-            },
-        };
-
-        axios(config)
-            .then(function (response) {
-                console.log(JSON.stringify(response.data));
-                var count = Object.keys(response.data).length;
-                let stateArray = [];
-                for (var i = 0; i < count; i++) {
-                    stateArray.push({
-                        value: response.data[i].iso2,
-                        label: response.data[i].name,
-                    });
-                }
-                setStateData(stateArray);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    };
-
-    const handleCity = (countryCode, stateCode) => {
-        var config = {
-            method: 'get',
-            url: `${BASE_URL}/countries/${countryCode}/states/${stateCode}/cities`,
-            headers: {
-                'X-CSCAPI-KEY': API_KEY,
-            },
-        };
-
-        axios(config)
-            .then(function (response) {
-                console.log(JSON.stringify(response.data));
-                var count = Object.keys(response.data).length;
-                let cityArray = [];
-                for (var i = 0; i < count; i++) {
-                    cityArray.push({
-                        value: response.data[i].id,
-                        label: response.data[i].name,
-                    });
-                }
-                setCityData(cityArray);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+    const handleSubmit1 = (values) => {
+        // Handle form submission
+        console.log("the button is clicked");
     };
 
     return (
+
         <View style={styles.container}>
-            <StatusBar barStyle="light-content" />
-            <View style={{ backgroundColor: '#fff', padding: 20, borderRadius: 15 }}>
-                <Dropdown
-                    style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
-                    placeholderStyle={styles.placeholderStyle}
-                    selectedTextStyle={styles.selectedTextStyle}
-                    inputSearchStyle={styles.inputSearchStyle}
-                    iconStyle={styles.iconStyle}
-                    data={countryData}
-                    search
-                    maxHeight={300}
-                    labelField="label"
-                    valueField="value"
-                    placeholder={!isFocus ? 'Select country' : '...'}
-                    searchPlaceholder="Search..."
-                    value={country}
-                    onFocus={() => setIsFocus(true)}
-                    onBlur={() => setIsFocus(false)}
-                    onChange={item => {
-                        setCountry(item.value);
-                        handleState(item.value);
-                        setCountryName(item.label);
-                        setIsFocus(false);
-                    }}
-                />
-                <Dropdown
-                    style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
-                    placeholderStyle={styles.placeholderStyle}
-                    selectedTextStyle={styles.selectedTextStyle}
-                    inputSearchStyle={styles.inputSearchStyle}
-                    iconStyle={styles.iconStyle}
-                    data={stateData}
-                    search
-                    maxHeight={300}
-                    labelField="label"
-                    valueField="value"
-                    placeholder={!isFocus ? 'Select state' : '...'}
-                    searchPlaceholder="Search..."
-                    value={state}
-                    onFocus={() => setIsFocus(true)}
-                    onBlur={() => setIsFocus(false)}
-                    onChange={item => {
-                        setState(item.value);
-                        handleCity(country, item.value);
-                        setStateName(item.label);
-                        setIsFocus(false);
-                    }}
-                />
-                <Dropdown
-                    style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
-                    placeholderStyle={styles.placeholderStyle}
-                    selectedTextStyle={styles.selectedTextStyle}
-                    inputSearchStyle={styles.inputSearchStyle}
-                    iconStyle={styles.iconStyle}
-                    data={cityData}
-                    search
-                    maxHeight={300}
-                    labelField="label"
-                    valueField="value"
-                    placeholder={!isFocus ? 'Select city' : '...'}
-                    searchPlaceholder="Search..."
-                    value={city}
-                    onFocus={() => setIsFocus(true)}
-                    onBlur={() => setIsFocus(false)}
-                    onChange={item => {
-                        setCity(item.value);
-                        setCityName(item.label);
-                        setIsFocus(false);
-                    }}
-                />
-                <TouchableOpacity
-                    style={{
-                        backgroundColor: '#0F3460',
-                        padding: 20,
-                        borderRadius: 15,
-                        alignItems: 'center',
-                    }}
-                    onPress={() =>
-                        Alert.alert(
-                            `You have selected\nCountry: ${countryName}\nState: ${stateName}\nCity: ${cityName}`,
-                        )
-                    }>
-                    <Text
-                        style={{
-                            color: '#fff',
-                            textTransform: 'uppercase',
-                            fontWeight: '600',
-                        }}>
-                        Submit
-                    </Text>
-                </TouchableOpacity>
-            </View>
+            <FlatList data={[1]}
+                renderItem={() => (
+                    <Formik
+                        initialValu={{
+                            carMake: '',
+                            carModel: '',
+                            carYear: '',
+                            carAssembly: '',
+                            carVariant: '',
+                            carTransmission: '',
+                            carType: '',
+                            engineType: '',
+                            enginceCapacity: '',
+                            seatingCapacity: '',
+                            bodyColor: '',
+                            betweenCitites: '',
+                            registrationCity: '',
+                            pickupCity: '',
+                            driverAvailability: '',
+                            carMileage: '',
+                            carRents: '',
+                            insured: '',
+                            descriptions: '',
+
+                            // Add more fields here if needed
+                        }}
+                        validationSchema={CarDetailsSchema}
+                        onSubmit={handleSubmit1}
+                    >
+                        {({ values, handleChange, handleSubmit, errors, touched,isValid,dirty }) => (
+                            <>
+                                <View style={styles.fieldContainer}>
+                                    <Text style={styles.label}>Car Model</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={handleChange('carModel')}
+                                        value={values.carModel}
+                                        placeholder="Enter car model"
+                                    />
+                                    {errors.carModel && touched.carModel && (
+                                        <Text style={styles.error}>{errors.carModel}</Text>
+                                    )}
+                                </View>
+
+                                <View style={styles.fieldContainer}>
+                                    <Text style={styles.label}>Car Year</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={handleChange('carYear')}
+                                        value={values.carYear.toString()}
+                                        placeholder="Enter car year"
+                                        keyboardType="numeric"
+                                    />
+                                    {errors.carYear && touched.carYear && (
+                                        <Text style={styles.error}>{errors.carYear}</Text>
+                                    )}
+                                </View>
+
+
+                                <View style={styles.fieldContainer}>
+                                    <Text style={styles.label}>Car Assembly</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={handleChange('carAssembly')}
+                                        value={values.carAssembly.toString()}
+                                        placeholder="Enter car assembly"
+                                    />
+                                    {errors.carAssembly && touched.carAssembly && (
+                                        <Text style={styles.error}>{errors.carAssembly}</Text>
+                                    )}
+                                </View>
+
+                                <View style={styles.fieldContainer}>
+                                    <Text style={styles.label}>Car Variant</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={handleChange('carVariant')}
+                                        value={values.carVariant.toString()}
+                                        placeholder="Enter car variant"
+                                    />
+                                    {errors.carVariant && touched.carVariant && (
+                                        <Text style={styles.error}>{errors.carVariant}</Text>
+                                    )}
+                                </View>
+
+                                <View style={styles.fieldContainer}>
+                                    <Text style={styles.label}>Car Transmission</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={handleChange('carTransmission')}
+                                        value={values.carTransmission.toString()}
+                                        placeholder="Enter car transmission"
+                                    />
+                                    {errors.carTransmission && touched.carTransmission && (
+                                        <Text style={styles.error}>{errors.carTransmission}</Text>
+                                    )}
+                                </View>
+
+                                <View style={styles.fieldContainer}>
+                                    <Text style={styles.label}>Car Type</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={handleChange('carType')}
+                                        value={values.carType.toString()}
+                                        placeholder="Enter car type"
+                                    />
+                                    {errors.carType && touched.carType && (
+                                        <Text style={styles.error}>{errors.carType}</Text>
+                                    )}
+                                </View>
+
+                                <View style={styles.fieldContainer}>
+                                    <Text style={styles.label}>Engine Type</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={handleChange('engineType')}
+                                        value={values.engineType.toString()}
+                                        placeholder="Enter engine type"
+
+                                    />
+                                    {errors.engineType && touched.engineType && (
+                                        <Text style={styles.error}>{errors.engineType}</Text>
+                                    )}
+                                </View>
+
+                                <View style={styles.fieldContainer}>
+                                    <Text style={styles.label}>Engince Capacity (CC)</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={handleChange('enginceCapacity')}
+                                        value={values.enginceCapacity.toString()}
+                                        placeholder="Enter engince capacity"
+                                        keyboardType="numeric"
+                                    />
+                                    {errors.enginceCapacity && touched.enginceCapacity && (
+                                        <Text style={styles.error}>{errors.enginceCapacity}</Text>
+                                    )}
+                                </View>
+
+                                <View style={styles.fieldContainer}>
+                                    <Text style={styles.label}>Seating Capacity</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={handleChange('seatingCapacity')}
+                                        value={values.seatingCapacity.toString()}
+                                        placeholder="Enter seating capacity"
+                                        keyboardType="numeric"
+                                    />
+                                    {errors.seatingCapacity && touched.seatingCapacity && (
+                                        <Text style={styles.error}>{errors.seatingCapacity}</Text>
+                                    )}
+                                </View>
+
+                                <View style={styles.fieldContainer}>
+                                    <Text style={styles.label}>Body Color</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={handleChange('bodyColor')}
+                                        value={values.bodyColor.toString()}
+                                        placeholder="Enter body color"
+                                    />
+                                    {errors.bodyColor && touched.bodyColor && (
+                                        <Text style={styles.error}>{errors.bodyColor}</Text>
+                                    )}
+                                </View>
+
+                                <View style={styles.fieldContainer}>
+                                    <Text style={styles.label}>Between Cities</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={handleChange('betweenCitites')}
+                                        value={values.betweenCitites.toString()}
+                                        placeholder="Enter between citites"
+
+                                    />
+                                    {errors.betweenCitites && touched.betweenCitites && (
+                                        <Text style={styles.error}>{errors.betweenCitites}</Text>
+                                    )}
+                                </View>
+                                <View style={styles.fieldContainer}>
+                                    <Text style={styles.label}>Registration City</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={handleChange('registrationCity')}
+                                        value={values.registrationCity.toString()}
+                                        placeholder="Enter registration city"
+
+                                    />
+                                    {errors.registrationCity && touched.registrationCity && (
+                                        <Text style={styles.error}>{errors.registrationCity}</Text>
+                                    )}
+                                </View>
+                                <View style={styles.fieldContainer}>
+                                    <Text style={styles.label}>Pickup city</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={handleChange('pickupCity')}
+                                        value={values.pickupCity.toString()}
+                                        placeholder="Enter pickup city"
+
+                                    />
+                                    {errors.pickupCity && touched.pickupCity && (
+                                        <Text style={styles.error}>{errors.pickupCity}</Text>
+                                    )}
+                                </View>
+                                <View style={styles.fieldContainer}>
+                                    <Text style={styles.label}>Driver Availability</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={handleChange('driverAvailability')}
+                                        value={values.driverAvailability.toString()}
+                                        placeholder="Enter driver availability"
+
+                                    />
+                                    {errors.driverAvailability && touched.driverAvailability && (
+                                        <Text style={styles.error}>{errors.driverAvailability}</Text>
+                                    )}
+                                </View>
+                                <View style={styles.fieldContainer}>
+                                    <Text style={styles.label}>Car Mileage (km)</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={handleChange('carMileage')}
+                                        value={values.carMileage.toString()}
+                                        placeholder="Enter car mileage"
+                                        keyboardType='numeric'
+
+                                    />
+                                    {errors.carMileage && touched.carMileage && (
+                                        <Text style={styles.error}>{errors.carMileage}</Text>
+                                    )}
+                                </View>
+                                <View style={styles.fieldContainer}>
+                                    <Text style={styles.label}>car rents (RS)</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={handleChange('carRents')}
+                                        value={values.carRents.toString()}
+                                        placeholder="Enter car rents"
+                                        keyboardType='numeric'
+
+                                    />
+                                    {errors.carRents && touched.carRents && (
+                                        <Text style={styles.error}>{errors.carRents}</Text>
+                                    )}
+                                </View>
+                                <View style={styles.fieldContainer}>
+                                    <Text style={styles.label}>Insured</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={handleChange('insured')}
+                                        value={values.insured.toString()}
+                                        placeholder="Enter insured"
+
+                                    />
+                                    {errors.insured && touched.insured && (
+                                        <Text style={styles.error}>{errors.insured}</Text>
+                                    )}
+                                </View>
+                                <View style={styles.fieldContainer}>
+                                    <Text style={styles.label}>descriptions</Text>
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={handleChange('descriptions')}
+                                        value={values.descriptions.toString()}
+                                        placeholder="Enter descriptions"
+
+                                    />
+                                    {errors.descriptions && touched.descriptions && (
+                                        <Text style={styles.error}>{errors.descriptions}</Text>
+                                    )}
+                                </View>
+
+                                {/* Add more fields here if needed */}
+
+                                <Button
+                                    title="Submit"
+                                    onPress={(values)=>console.log(`values ${values} \n is valid ${isValid}`)}
+                                    disabled={false}
+                                />
+                                {/* ToucableOpacity */}
+                                {/* <MainButton title="Submit" onPress={handleSubmit}
+                                    // disabled={ values.carMake && values.carModel && values.carYear && values.carAssembly && values.carVariant && values.carTransmission && values.carType && values.engineType && values.enginceCapacity && values.seatingCapacity && values.bodyColor && values.betweenCitites && values.registrationCity && values.pickupCity && values.driverAvailability && values.carMileage && values.carRents && values.insured && values.descriptions} 
+                                    disabled={!isValid || !dirty}
+                                /> */}
+
+                            </>
+                        )}
+                    </Formik>
+                )}
+            />
+
         </View>
+
     );
 };
 
-export default UploadCarDetailesScreen;
-
 const styles = StyleSheet.create({
+
     container: {
         flex: 1,
-        backgroundColor: '#533483',
-        padding: 16,
-        justifyContent: 'center',
-        alignContent: 'center',
+        padding: 20,
+        // marginBottom:100,
+        backgroundColor: '#fff',
     },
-    dropdown: {
-        height: 50,
-        borderColor: 'gray',
-        borderWidth: 0.5,
-        borderRadius: 8,
-        paddingHorizontal: 8,
-        marginBottom: 10,
-    },
-    icon: {
-        marginRight: 5,
+    fieldContainer: {
+        marginBottom: 20,
     },
     label: {
-        position: 'absolute',
-        backgroundColor: 'white',
-        left: 22,
-        top: 8,
-        zIndex: 999,
-        paddingHorizontal: 8,
-        fontSize: 14,
-    },
-    placeholderStyle: {
         fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 5,
     },
-    selectedTextStyle: {
-        fontSize: 16,
-    },
-    iconStyle: {
-        width: 20,
-        height: 20,
-    },
-    inputSearchStyle: {
+    input: {
         height: 40,
-        fontSize: 16,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        paddingHorizontal: 10,
+    },
+    error: {
+        color: 'red',
+        fontSize: 14,
+        marginTop: 5,
     },
 });
-// import React, { useState } from 'react';
-// import { View, Text, ScrollView, FlatList, TextInput, TouchableOpacity, KeyboardAvoidingView, TouchableWithoutFeedback, Pressable } from 'react-native';
-// import { Formik } from 'formik';
-// import * as Yup from 'yup';
-// import useLogin from '../customHooks/useLogin';
-// import { Input, Button } from 'react-native-elements';
-// import DropDownPicker from 'react-native-dropdown-picker';
-// const CarForm = () => {
-//     const [open, setOpen] = useState(false);
-//     // const [value, setValue] = useState(null);
-//     // const [items, setItems] = useState([
-//     //     { label: 'Apple', value: 'apple' },
-//     //     { label: 'Banana', value: 'banana' }
-//     // ]);
-//     const [open1, setOpen1] = useState(false);
-//     const [open2, setOpen2] = useState(false);
-//     const { handleScreenPress } = useLogin();
-//     const [open3, setOpen3] = useState(false);
 
-//     const initialValues = {
-//         // ...other field values
-//         carMake: '',
-//         carModel: '',
-//         modelYear: '',
-//         // ...other field values
-//     };
-
-//     const validationSchema = Yup.object().shape({
-//         // ...other field validations
-//         carMake: Yup.string().required('Car make is required'),
-//         carModel: Yup.string().required('Car model is required'),
-//         modelYear: Yup.string().required('Model year is required'),
-//         // ...other field validations
-//     });
-
-//     const handleSubmit = (values) => {
-//         // Handle form submission
-//         console.log("you click this button", values);
-//     };
-//     const carModelItems = [
-//         { label: 'Make 1', value: 'make1' },
-//         { label: 'Make 2', value: 'make2' },
-//         // Add more make options here
-//     ]
-//     return (
-//         <View style={[styles.container, { backgroundColor: 'white' }]}>
-
-//             <TouchableWithoutFeedback onPress={handleScreenPress}>
-//                 <KeyboardAvoidingView style={[styles.inputContainer]} behavior="padding" >
-
-//                     <FlatList
-//                         data={[1]} // Dummy data to enable scrolling
-//                         renderItem={() => (
-//                             <Formik
-//                                 initialValues={initialValues}
-//                                 validationSchema={validationSchema}
-//                                 onSubmit={handleSubmit}
-//                             >
-//                                 {({ values, handleChange, handleSubmit, errors, touched }) => (
-//                                     <View style={styles.fieldContainer}>
-//                                         <Text style={styles.label}>Model Year</Text>
-//                                         <DropDownPicker
-//                                             items={[
-//                                                 { label: 'Year 1', value: 'year1' },
-//                                                 { label: 'Year 2', value: 'year2' },
-//                                                 // Add more year options here
-//                                             ]}
-//                                             defaultValue={values.modelYear}
-//                                             containerStyle={{ height: 40, marginBottom: 10 }}
-//                                             style={{ backgroundColor: '#fafafa' }}
-//                                             dropDownStyle={{ backgroundColor: '#fafafa' }}
-//                                             onChangeItem={(item) => handleChange('modelYear')(item.value)}
-//                                         />
-//                                         {errors.modelYear && touched.modelYear && (
-//                                             <Text style={styles.error}>{errors.modelYear}</Text>
-//                                         )}
-//                                         <TouchableOpacity onPress={()=>console.log("hello")}>
-//                                             <Text>hello</Text>
-//                                         </TouchableOpacity>
-//                                     </View>
-//                                 )}
-//                             </Formik>
-//                         )}
-//                         keyExtractor={(item, index) => index.toString()}
-//                     />
-
-//                 </KeyboardAvoidingView>
-//             </TouchableWithoutFeedback>
-
-//         </View >
-//     );
-// };
-
-// const styles = {
-//     container: {
-//         flex: 1,
-//         padding: 20,
-//         backgroundColor: '#fff',
-//         shadowColor: '#000',
-//         shadowOffset: { width: 0, height: 2 },
-//         shadowOpacity: 0.25,
-//         shadowRadius: 3,
-//         elevation: 5,
-//     },
-//     formContainer: {
-//         backgroundColor: 'red',
-//         height: 200,
-//         // justifyContent:'center'
-//     },
-//     column: {
-//         flexDirection: 'row',
-//         justifyContent: 'space-between',
-//         marginBottom: 20,
-//     },
-//     fieldContainer: {
-//         flex: 1,
-//         marginBottom: 15,
-//     },
-//     label: {
-//         fontSize: 16,
-//         fontWeight: 'bold',
-//         marginBottom: 5,
-//     },
-//     input: {
-//         height: 40,
-//         borderColor: '#ccc',
-//         borderWidth: 1,
-//         paddingHorizontal: 10,
-//     },
-//     error: {
-//         color: 'red',
-//         fontSize: 14,
-//         marginTop: 5,
-//     },
-//     button: {
-//         backgroundColor: 'blue',
-//         paddingVertical: 10,
-//         alignItems: 'center',
-//         borderRadius: 5,
-//         marginTop: 20,
-//     },
-//     buttonText: {
-//         color: '#fff',
-//         fontSize: 16,
-//         fontWeight: 'bold',
-//     },
-//     dropDownContainer: { backgroundColor: '#3f3', fontSize: 28, },
-//     dropDownContainerStyle: { height: 70, marginBottom: 10, backgroundColor: 'red', },
-//     dropDownMenuStyle: { backgroundColor: '#eeee' }
-// }
-// export default CarForm;
-
-
-
+export default UploadCarDetailesScreen;
