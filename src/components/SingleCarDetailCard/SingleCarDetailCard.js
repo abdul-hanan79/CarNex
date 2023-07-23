@@ -10,7 +10,7 @@ console.log(params)
     return (
         <View>
             <Text>
-                hello
+                hello how are you 
             </Text>
         </View>
         // <View style={styles.card}>
